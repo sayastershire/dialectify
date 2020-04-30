@@ -1,0 +1,31 @@
+#sidebar, #main_view {
+  border-style: solid;
+  border-color: #000;
+  border-width: 1px;
+}
+
+.title, #input_form {
+  margin: 2% 2%;
+}
+
+.safezone {
+  min-width: 768px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#main_view {
+  width: 75%;
+  float: left;
+}
+
+#sidebar {
+  width: 20%;
+  float: left;
+}
+
+#input_text {
+  width: 97%;
+}
+
+/*# sourceMappingURL=app.css.map */
