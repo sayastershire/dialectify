@@ -37,27 +37,29 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
             //break;
         }
         if ($match == strlen($pattern)) { // Replace the stuff here.
-            // Word prefix
-            $constructedWord = [];
-            $stringPrefix = [];
-            $stringSuffix = [];
-            for ($j = 0; $j < $stringPointer + 1; $j++){
-                $constructedWord[] = $explodedString[$j];
-            }
-            // replace Word = $replace
-            $explodedReplace = str_split($replace);
-            for ($j = 0; $j < strlen($replace); $j++)
-                $constructedWord[] = $explodedReplace[$j];
-            // Word suffix
-            for ($j = $stringPointer + strlen($pattern) + 1; $j < strlen($fullString); $j++){
-                $constructedWord[] = $explodedString[$j];
-            }
-            //array_push($constructedWord, $stringPrefix, $explodedReplace, $stringSuffix);
+            if ($explodedString[$stringPointer + strlen($pattern) + 1] == " " || $explodedString[$stringPointer + strlen($pattern) + 1] == "," || $explodedString[$stringPointer + strlen($pattern) + 1] == ".") {
+                // Word prefix
+                $constructedWord = [];
+                $stringPrefix = [];
+                $stringSuffix = [];
+                for ($j = 0; $j < $stringPointer + 1; $j++){
+                    $constructedWord[] = $explodedString[$j];
+                }
+                // replace Word = $replace
+                $explodedReplace = str_split($replace);
+                for ($j = 0; $j < strlen($replace); $j++)
+                    $constructedWord[] = $explodedReplace[$j];
+                // Word suffix
+                for ($j = $stringPointer + strlen($pattern) + 1; $j < strlen($fullString); $j++){
+                    $constructedWord[] = $explodedString[$j];
+                }
+                //array_push($constructedWord, $stringPrefix, $explodedReplace, $stringSuffix);
 
-            //Getting it all together
+                //Getting it all together
 
-            $stringPointer += strlen($replace);
-            $explodedString = $constructedWord;
+                $stringPointer += strlen($replace);
+                $explodedString = $constructedWord;
+            }
         }
         else { // Sliding mechanism
             if ($stringPointer + strlen($pattern) < strlen($fullString)){

@@ -24,7 +24,7 @@
                 <textarea name="input_text" id="input_text" rows="10" required autofocus>Andi bermain ke pasar minggu bersama dengan mama. Ia menginginkan untuk membeli 50 buah epal merah dan satu boks mainan terkenal pada jaman papa dulu, sedangkan mamanya menginginkan 13 buah baju baru. Pamannya berpesan kepada mamanya Andi untuk mengingatkannya mengenai janjian pada pukul lima nanti.</textarea>
                 <br>
                 <input type="submit" value="Give dialects please, pretty sir!"><br>
-                <label>Sidenote: only Indonesian + Dutch dialect works now. This will be a proof of concept for an assignment. Those who aspire to contribute may do so in ((LINK WILL BE POSTED HERE SOON)).</label>
+                <label>Sidenote: only Indonesian + Dutch dialect works now. This will be a proof of concept for an assignment. Those who aspire to contribute may do so <a href="https://github.com/sayastershire/dialectify">here</a>.</label>
             </form>
 
             
