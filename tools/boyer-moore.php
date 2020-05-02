@@ -1,0 +1,1 @@
+/home/vin/Projects/algorithm/string/boyer-moore/php/boyer-moore.php

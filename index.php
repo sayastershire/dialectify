@@ -10,7 +10,7 @@
 <body>
     <div class="safezone">
         <div id="main_view">
-            <h2 class="title">Dialectify! Create bizzare new dialects with armies!</h2>
+            <h2 class="title">Dialectify! Create bizzare new dialects!</h2>
             <form method="post" action="processor.php" autocomplete="off" id="input_form">
                 <label for="language">Input language: </label>
                 <select id="language" name="language">
@@ -21,8 +21,8 @@
                     <option value="dutch">Dutch</option>
                 </select><br>
                 <label for="input_text">Input pure text here:</label><br>
-                <textarea name="input_text" id="input_text" rows="10" required autofocus>Andi bermain ke pasar minggu bersama dengan mama. Ia menginginkan untuk membeli 50 buah epal merah dan satu boks mainan terkenal pada jaman papa dulu, sedangkan mamanya menginginkan 13 buah baju baru. Pamannya berpesan kepada mamanya Andi untuk mengingatkannya mengenai janjian pada pukul lima nanti.
-                </textarea><br>
+                <textarea name="input_text" id="input_text" rows="10" required autofocus>Andi bermain ke pasar minggu bersama dengan mama. Ia menginginkan untuk membeli 50 buah epal merah dan satu boks mainan terkenal pada jaman papa dulu, sedangkan mamanya menginginkan 13 buah baju baru. Pamannya berpesan kepada mamanya Andi untuk mengingatkannya mengenai janjian pada pukul lima nanti.</textarea>
+                <br>
                 <input type="submit" value="Give dialects please, pretty sir!"><br>
                 <label>Sidenote: only Indonesian + Dutch dialect works now. This will be a proof of concept for an assignment. Those who aspire to contribute may do so in ((LINK WILL BE POSTED HERE SOON)).</label>
             </form>

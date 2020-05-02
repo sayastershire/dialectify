@@ -1,25 +1,21 @@
+<a href="/">Back</a><br>
 <?php
+
+require("tools/boyer-moore.php");
 
 $dictionary = require("parser.php");
 
 $inputText = $_POST["input_text"];
-echo $inputText;
-$inputText = preg_replace("/\. /", ".", $inputText);
-$inputSentence = explode(".", $inputText);
-$splitSentence = [];
+//echo $inputText."<br>";
+var_dump($inputText);
 
-for ($i = 0; $i < count($inputSentence); $i++){
-    $splitSentence[] = explode(" ", $inputSentence[$i]);
+foreach ($dictionary as $key => $value) {
+    boyerMooreReplace($inputText, $value[1], $value[0]);
 }
 
-//foreach ($dictionary as $word){
-//
-//}
+echo "<br>------------<br><br>";
+echo $inputText."<br>";
 
 
-for ($i = 0; $i < count($splitSentence); $i++) {
-   for ($j = 0; $j < count($splitSentence[$i]); $j++){
-       echo ($i+1).".".($j+1).": ".$splitSentence[$i][$j]."<br>";
-   } 
-}
+
 ?>
