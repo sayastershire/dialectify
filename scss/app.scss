@@ -1,3 +1,4 @@
+// Extendables
 %app_border {
     border-style: solid;
     border-color: #000;
@@ -5,25 +6,29 @@
 }
 
 %nested_margin {
-    margin: 2% 2%;
+    margin: 16px 0;
 }
+
 
 .safezone {
     min-width: 768px;
-    width: 80%;
-    margin: 0 auto;
+    margin: 0 50px;
 }
 
 #main_view {
     @extend %app_border;
-    width: 75%;
+    width: 71%;
     float: left;
+}
+
+#main_view, #sidebar {
+    padding: 5px 15px;
 }
 
 #sidebar {
     @extend %app_border;
-    width: 20%;
-    float: left;
+    width: 22%;
+    float: right;
 }
 
 #input_form {

@@ -5,23 +5,26 @@
 }
 
 .title, #input_form {
-  margin: 2% 2%;
+  margin: 16px 0;
 }
 
 .safezone {
   min-width: 768px;
-  width: 80%;
-  margin: 0 auto;
+  margin: 0 50px;
 }
 
 #main_view {
-  width: 75%;
+  width: 71%;
   float: left;
 }
 
+#main_view, #sidebar {
+  padding: 5px 15px;
+}
+
 #sidebar {
-  width: 20%;
-  float: left;
+  width: 22%;
+  float: right;
 }
 
 #input_text {
