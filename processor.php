@@ -6,13 +6,16 @@ require('tools/boyer-moore.php');
 require('parser.php');
 require('variables.php');
 
-var_dump($_POST);
-echo strlen($_POST['input_text']);
-
 // Variables
 $inputText = $_POST['input_text'];
+$debug = false;
 
-echo 'Input word: <br>'.$_POST['input_text'].'<br><br>';
+if ($debug){
+    var_dump($_POST);
+    echo "Length of input text is ", strlen($_POST['input_text']), ".<br>";
+    echo 'Input word: <br>'.$_POST['input_text'].'<br><br>';
+}
+
 
 switch($_POST['mode-of-operation']){
     case 'translate':
@@ -34,7 +37,7 @@ switch($_POST['mode-of-operation']){
         $foundAmount = [];
 
         foreach (variables\DIALECTS as $dialect){
-            echo 'Searching for ',$dialect,'.<br>';
+            if ($debug) echo 'Searching for ',$dialect,'.<br>';
             $dictionary = parser\loadDictionary($dialect);
             $tempAmount = 0;
             foreach($dictionary as $value){

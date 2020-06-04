@@ -67,7 +67,7 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
     return 0;
 }
 
-function boyerMooreFind(&$fullString, $pattern){
+function boyerMooreFind(&$fullString, $pattern, $debug = false){
     //echo '&emsp;Word: ',$pattern;
     // Variables
     $PATTERN_STRLEN = strlen($pattern);
@@ -105,7 +105,7 @@ function boyerMooreFind(&$fullString, $pattern){
         // A word is found.
         if ($match == $PATTERN_STRLEN) {
             if (($explodedString[$stringPointer + $PATTERN_STRLEN + 1] == ' ' || $explodedString[$stringPointer + $PATTERN_STRLEN + 1] == ',' || $explodedString[$stringPointer + $PATTERN_STRLEN + 1] == '.') && ($explodedString[$stringPointer] == ' ' || $explodedString[$stringPointer] == ',' || $explodedString[$stringPointer] == '.')) {
-                echo '&emsp;Word found.(', $pattern,'|',$stringPointer,'|',strlen($fullString),').<br>';
+                if ($debug) echo '&emsp;Word found.(', $pattern,'|',$stringPointer,'|',strlen($fullString),').<br>';
                 ++$foundWord;
             }
             $stringPointer += ($PATTERN_STRLEN + 1);

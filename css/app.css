@@ -5,12 +5,32 @@
 }
 
 .title, #input_form {
-  margin: 16px 0;
+  margin: 12px 0;
 }
 
 .safezone {
   min-width: 768px;
   margin: 0 50px;
+}
+
+.tabcontent {
+  display: none;
+}
+.tabcontent.active {
+  display: inline-block;
+}
+
+button.tab {
+  border: none;
+}
+
+#content-input {
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+}
+#content-input form#input-form {
+  padding: 4px;
 }
 
 #main_view {
@@ -19,7 +39,7 @@
 }
 
 #main_view, #sidebar {
-  padding: 5px 15px;
+  padding: 15px;
 }
 
 #sidebar {
