@@ -7,7 +7,7 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
     $patternPointer = strlen($pattern) - 1;
     $i = 0;
     while ($stringPointer < count($explodedString)){
-        if ($pattern == "") break;
+        if ($pattern == '') break;
         if ($i >= 1000) break;
         $match = 0;
         $patternPointer = strlen($pattern) - 1;
@@ -16,7 +16,7 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
                 // If matched
                 $stringPointer--;
                 $patternPointer--;
-                $match++;
+                ++$match;
             }
             else {
                 // If did not match
@@ -24,7 +24,7 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
             }
         }
         if ($match == strlen($pattern)) { // Replace the stuff here.
-            if ($explodedString[$stringPointer + strlen($pattern) + 1] == " " || $explodedString[$stringPointer + strlen($pattern) + 1] == "," || $explodedString[$stringPointer + strlen($pattern) + 1] == ".") {
+            if ($explodedString[$stringPointer + strlen($pattern) + 1] == ' ' || $explodedString[$stringPointer + strlen($pattern) + 1] == ',' || $explodedString[$stringPointer + strlen($pattern) + 1] == '.') {
                 // Word prefix
                 $constructedWord = [];
                 $stringPrefix = [];
@@ -61,37 +61,40 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
             }
             $patternPointer = strlen($pattern) - 1;
         }
-        $i++;
+        ++$i;
     }
     $fullString = implode($explodedString);
     return 0;
 }
 
 function boyerMooreFind(&$fullString, $pattern){
+    //echo '&emsp;Word: ',$pattern;
     // Variables
+    $PATTERN_STRLEN = strlen($pattern);
+    $STRING_STRLEN = strlen($fullString);
     $explodedString = str_split($fullString);
     $explodedPattern = str_split($pattern);
-    $stringPointer = strlen($pattern) - 1;
-    $patternPointer = strlen($pattern) - 1;
+    $stringPointer = $PATTERN_STRLEN - 1;
+    $patternPointer = $PATTERN_STRLEN - 1;
     $i = 0;
     $foundWord = 0;
 
     // Lookup table
     $lookupTable = array_fill(0, 255, false);
-    for ($i = 0; $i < strlen($pattern); $i++)
+    for ($i = 0; $i < $PATTERN_STRLEN; $i++)
         $lookupTable[ord($explodedPattern[$i])] = true;
 
-    while ($stringPointer < count($explodedString)){
-        //if ($pattern == "hina dina") echo "(".$stringPointer."|".$patternPointer.")";
-        if ($pattern == "") break;
+    while ($stringPointer < $STRING_STRLEN) {
+        //if ($pattern == 'hina dina') echo '('.$stringPointer.'|'.$patternPointer.')';
+        if ($pattern == '') break;
         $match = 0;
-        $patternPointer = strlen($pattern) - 1;
+        $patternPointer = $PATTERN_STRLEN - 1;
         while ($patternPointer > -1){
             if ($explodedString[$stringPointer] == $explodedPattern[$patternPointer]){
                 // If matched
                 $stringPointer--;
                 $patternPointer--;
-                $match++;
+                ++$match;
             }
             else {
                 // If did not match
@@ -100,18 +103,18 @@ function boyerMooreFind(&$fullString, $pattern){
             }
         }
         // A word is found.
-        if ($match == strlen($pattern)){
-            if (($explodedString[$stringPointer + strlen($pattern) + 1] == " " || $explodedString[$stringPointer + strlen($pattern) + 1] == "," || $explodedString[$stringPointer + strlen($pattern) + 1] == ".") && ($explodedString[$stringPointer] == " " || $explodedString[$stringPointer] == "," || $explodedString[$stringPointer] == ".")) {
-                echo "&emsp;Word found.(".$pattern."|".$stringPointer."|".strlen($fullString).").<br>";
-                $foundWord++;
+        if ($match == $PATTERN_STRLEN) {
+            if (($explodedString[$stringPointer + $PATTERN_STRLEN + 1] == ' ' || $explodedString[$stringPointer + $PATTERN_STRLEN + 1] == ',' || $explodedString[$stringPointer + $PATTERN_STRLEN + 1] == '.') && ($explodedString[$stringPointer] == ' ' || $explodedString[$stringPointer] == ',' || $explodedString[$stringPointer] == '.')) {
+                echo '&emsp;Word found.(', $pattern,'|',$stringPointer,'|',strlen($fullString),').<br>';
+                ++$foundWord;
             }
-            $stringPointer += (strlen($pattern) + 1);
+            $stringPointer += ($PATTERN_STRLEN + 1);
         }
         else {
-            $stringPointer += strlen($pattern);
+            $stringPointer += $PATTERN_STRLEN;
         }
-        $patternPointer = strlen($pattern) - 1;
-        $i++;
+        $patternPointer = $PATTERN_STRLEN - 1;
+        ++$i;
     }
     $fullString = implode($explodedString);
     return $foundWord;

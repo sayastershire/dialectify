@@ -1,3 +1,8 @@
+<!-- 
+    Hey whoever gets to see this, I just wanna remind you to WRITE AllowOverride None in the directory, okay?
+    --sleep-deprived vin:)
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
