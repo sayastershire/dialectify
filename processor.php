@@ -1,21 +1,51 @@
 <a href="/">Back</a><br>
 <?php
 
+// Tools
 require("tools/boyer-moore.php");
+require("parser.php");
+require("variables.php");
 
-$dictionary = require("parser.php");
+var_dump($_POST);
+echo strlen($_POST["input_text"]);
 
-$inputText = $_POST["input_text"];
-//echo $inputText."<br>";
-var_dump($inputText);
+echo "Input word: <br>".$_POST["input_text"]."<br><br>";
 
-foreach ($dictionary as $key => $value) {
-    boyerMooreReplace($inputText, $value[1], $value[0]);
+switch($_POST["mode-of-operation"]){
+    case 'translate':
+        $dictionary = require("parser.php");
+
+        $inputText = $_POST["input_text"];
+        //echo $inputText."<br>";
+        var_dump($inputText);
+
+        foreach ($dictionary as $key => $value) {
+            boyerMooreReplace($inputText, $value[1], $value[0]);
+        }
+
+        echo "<br>------------<br><br>";
+        echo $inputText."<br>";
+        break;
+    case 'analyse':
+        // var_dump(variables\DIALECTS);
+        $startTimer = microtime(true);
+        $foundAmount = [];
+        foreach (variables\DIALECTS as $dialect){
+            echo "Parsing ".$dialect.".<br>";
+            $dictionary = parser\loadDictionary($dialect);
+            $tempAmount = 0;
+            foreach($dictionary as $value){
+                //echo "&emsp;Checking for ".$value[0];
+                $tempAmount += boyerMooreFind($_POST["input_text"], $value[0]);
+                //echo ".<br>";
+            }
+            array_push($foundAmount, $tempAmount);
+            // var_dump($dictionary);
+        }
+        $stopTimer = microtime(true);
+        $timeElapsed = $stopTimer - $startTimer;
+        echo "Time: ".$timeElapsed."<br>";
+        for ($i = 0; $i < count(variables\DIALECTS); $i++)
+            echo variables\DIALECTS[$i].": ".$foundAmount[$i]."<br>";
+        break;
 }
-
-echo "<br>------------<br><br>";
-echo $inputText."<br>";
-
-
-
-?>

@@ -5,3 +5,12 @@ function filler1(){
     document.getElementById("input_text").innerText = IndonesianSample1;
     return 0;
 }
+
+function showLanguagePane(){
+    document.getElementById("language-dialog").style.display = "";
+    return 0;
+}
+
+function hideLanguagePane(){
+    document.getElementById("language-dialog").style.display = "none";
+}

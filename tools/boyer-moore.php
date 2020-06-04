@@ -1,8 +1,6 @@
 <?php
+
 function boyerMooreReplace(&$fullString, $pattern, $replace){
-    // REMINDER: NO NON-ARRAY ON FULLSTRING.
-    // pattern size: strlen($pattern)
-    //var_dump($pattern);
     $explodedString = str_split($fullString);
     $explodedPattern = str_split($pattern);
     $stringPointer = strlen($pattern) - 1;
@@ -13,17 +11,7 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
         if ($i >= 1000) break;
         $match = 0;
         $patternPointer = strlen($pattern) - 1;
-        //var_dump($stringPointer);
-        //var_dump($patternPointer);
         while ($patternPointer > -1){
-            //echo "patternPointer";
-            //var_dump($stringPointer);
-            //var_dump($patternPointer);
-            //var_dump($explodedString);
-            //var_dump($explodedString[$stringPointer]);
-            //var_dump($explodedPattern);
-            //var_dump($explodedPattern[$patternPointer]);
-            //var_dump($match);
             if ($explodedString[$stringPointer] == $explodedPattern[$patternPointer]){
                 // If matched
                 $stringPointer--;
@@ -34,7 +22,6 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
                 // If did not match
                 $patternPointer--;
             }
-            //break;
         }
         if ($match == strlen($pattern)) { // Replace the stuff here.
             if ($explodedString[$stringPointer + strlen($pattern) + 1] == " " || $explodedString[$stringPointer + strlen($pattern) + 1] == "," || $explodedString[$stringPointer + strlen($pattern) + 1] == ".") {
@@ -53,10 +40,8 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
                 for ($j = $stringPointer + strlen($pattern) + 1; $j < strlen($fullString); $j++){
                     $constructedWord[] = $explodedString[$j];
                 }
-                //array_push($constructedWord, $stringPrefix, $explodedReplace, $stringSuffix);
 
                 //Getting it all together
-
                 $stringPointer += strlen($replace);
                 $explodedString = $constructedWord;
             }
@@ -80,4 +65,54 @@ function boyerMooreReplace(&$fullString, $pattern, $replace){
     }
     $fullString = implode($explodedString);
     return 0;
+}
+
+function boyerMooreFind(&$fullString, $pattern){
+    // Variables
+    $explodedString = str_split($fullString);
+    $explodedPattern = str_split($pattern);
+    $stringPointer = strlen($pattern) - 1;
+    $patternPointer = strlen($pattern) - 1;
+    $i = 0;
+    $foundWord = 0;
+
+    // Lookup table
+    $lookupTable = array_fill(0, 255, false);
+    for ($i = 0; $i < strlen($pattern); $i++)
+        $lookupTable[ord($explodedPattern[$i])] = true;
+
+    while ($stringPointer < count($explodedString)){
+        //if ($pattern == "hina dina") echo "(".$stringPointer."|".$patternPointer.")";
+        if ($pattern == "") break;
+        $match = 0;
+        $patternPointer = strlen($pattern) - 1;
+        while ($patternPointer > -1){
+            if ($explodedString[$stringPointer] == $explodedPattern[$patternPointer]){
+                // If matched
+                $stringPointer--;
+                $patternPointer--;
+                $match++;
+            }
+            else {
+                // If did not match
+                if ($lookupTable[ord($explodedString[$stringPointer])] == false) break;
+                $patternPointer--;
+            }
+        }
+        // A word is found.
+        if ($match == strlen($pattern)){
+            if (($explodedString[$stringPointer + strlen($pattern) + 1] == " " || $explodedString[$stringPointer + strlen($pattern) + 1] == "," || $explodedString[$stringPointer + strlen($pattern) + 1] == ".") && ($explodedString[$stringPointer] == " " || $explodedString[$stringPointer] == "," || $explodedString[$stringPointer] == ".")) {
+                echo "&emsp;Word found.(".$pattern."|".$stringPointer."|".strlen($fullString).").<br>";
+                $foundWord++;
+            }
+            $stringPointer += (strlen($pattern) + 1);
+        }
+        else {
+            $stringPointer += strlen($pattern);
+        }
+        $patternPointer = strlen($pattern) - 1;
+        $i++;
+    }
+    $fullString = implode($explodedString);
+    return $foundWord;
 }
